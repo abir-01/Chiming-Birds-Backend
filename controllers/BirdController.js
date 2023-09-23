@@ -95,5 +95,19 @@ const addbird = (async (req, res) => {
     // }
 })
 
+const getbird = (async (req, res) => {
+    // console.log(req.params.id)  
+    const id = req.params.id;
+    const birdrequired = await Birds.find({_id:id})
 
-module.exports = { getallbirds, addbird };
+    if (birdrequired) {
+        res.status(200).json({"bird":birdrequired})
+    }
+    else {
+        res.status(400);
+        throw new Error("No bird with the given _id exists");
+    }
+})
+
+
+module.exports = { getallbirds, addbird,getbird };
